@@ -19,8 +19,9 @@ app.post('/url',(req,res)=>{
     const password= req.body.password;
     const startdate= req.body.startdate;
     const enddate= req.body.enddate;
+    const qrcode= req.body.qrcode;
 
-    handlePostUrl(longUrl,CustomUrl,password,startdate,enddate);
+    handlePostUrl(longUrl,CustomUrl,password,startdate,enddate,qrcode);
     res.json({
        msg:"done"
     })

@@ -28,6 +28,9 @@ const UrlSchema = new mongoose.Schema({
     },
     enddate: {
         type:Date
+    },
+    qrcode:{
+        type:String
     }
 })
 

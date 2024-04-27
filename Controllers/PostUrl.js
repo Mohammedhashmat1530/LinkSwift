@@ -1,26 +1,39 @@
 const { URL } = require('../DB/db');
 const simpleId = require("simple-id");
+const qr = require('qrcode');
 
 
-async function handlePostUrl(longUrl, CustomUrl, password, startdate, enddate) {
+async function generateQRCode(longUrl) {
+    return new Promise((resolve, reject) => {
+        qr.toString(longUrl, { type: 'svg' }, (err, svgString) => {
+            if (err) reject(err);
+            else resolve(svgString);
+        });
+    });
+}
 
 
+async function handlePostUrl(longUrl, CustomUrl, password, startdate, enddate,qrcode) {
+
+    let svg = "no qr generated";
     try {
-        const shortUrl = CustomUrl || simpleId(); // Use CustomUrl if provided, else generate one
+        const shortUrl = CustomUrl || simpleId();
+        if (qrcode) {
+            svg = await generateQRCode(longUrl);
+        }
+
+
         await URL.create({
             longUrl,
             shortUrl,
             CustomUrl,
             password,
             startdate,
-            enddate
+            enddate,
+            qrcode:svg
         });
-
-
-
     } catch (error) {
         console.error('Error saving URL:', error);
-
     }
 }
 
