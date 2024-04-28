@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Using Tailwind CSS</title>
+  <!-- Include the Tailwind CSS stylesheet -->
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+
+  <style>
+      body {
+      background-image: url('https://images.unsplash.com/photo-1554034483-04fda0d3507b?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .blue {
+      color: #2F3C7E;
+    }
+
+    
+
+    .border {
+      border-bottom: 1px solid black;
+    }
+
+    .translate-up {
+      transform: translateY(-130%);
+
+    }
+
+    .orange {
+      color: orange;
+    }
+
+
+    /* State when the input field is focused */
+    .focus\:border-blue-500:focus {
+      border-top: 0;
+      border-bottom: 3px solid #2F3C7E;
+    }
+
+  </style>
+
+</head>
+
+<body class="h-screen">
+
+  <div>
+    <div class="py-8 cream">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl font-bold blue mb-4 leading-4">LinkSwift</h1>
+        <p class="text-lg text-gray-800 tracking-wider">Streamline Your Links, Swiftly.<span class="text-3xl">🔗</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="backgroundimage">
+  <div class="max-w-screen-xl mx-auto bg-white p-8 rounded shadow-md ">
+    <div class="mb-4">
+
+      <div class="relative w-full">
+        <input type="text"
+          class="animated-input appearance-none border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline w-full transition duration-300 ease-in-out text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100">
+        <label
+          class="placeholder  text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100 absolute left-3 top-2 text-gray-500 transition-all duration-300 origin-top transform pointer-events-none">Place
+          your URL here!</label>
+      </div>
+
+
+
+
+
+      <label class="block text-gray-700 font-bold mb-2">Options:</label>
+      <div class="flex items-center justify-around">
+        <div>
+          <input id="customize-link" type="checkbox" class="mr-2 h-4 w-4 "
+            onclick="toggleElement('customize-link-div')">
+          <label for="customize-link" class="mr-4 text-xl font-medium">Customize Link</label>
+        </div>
+        <div>
+          <input id="link-with-password" type="checkbox" class="mr-2 h-4 w-4 "
+            onclick="toggleElement('link-with-password-div')">
+          <label for="link-with-password" class="mr-4 text-xl font-medium">Link with Password</label>
+        </div>
+        <div>
+          <input id="set-dates" type="checkbox" class="mr-2 h-4 w-4 " onclick="toggleElement('set-dates-div')">
+          <label for="set-dates" class="mr-4 text-xl font-medium">Set Dates</label>
+        </div>
+        <div>
+          <input id="generate-qr-code" type="checkbox" class="mr-2 h-4 w-4 "
+            onclick="toggleElement('generate-qr-code-div')">
+          <label for="generate-qr-code" class="mr-4 text-xl font-medium">Generate QR Code</label>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="customize-link-div" class="hidden mb-4 py-3">
+      <!-- Link with Password Content -->
+
+      <div class="relative w-full">
+        <input type="text"
+          class="animated-input appearance-none border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline w-full transition duration-300 ease-in-out text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100">
+        <label
+          class="placeholder  text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100 absolute left-3 top-2 text-gray-500 transition-all duration-300 origin-top transform pointer-events-none">🔗set
+          your custom path</label>
+      </div>
+      <div class="p-2 m-2 bg-blue-200">
+        <p class="text-gray-700">Your customized link will have the following path: /</p>
+      </div>
+
+    </div>
+
+
+
+    <div id="link-with-password-div" class="hidden mb-4 pt-6">
+      <!-- Link with Password Content -->
+
+      <div class="relative w-full ">
+        <input type="text"
+          class="animated-input appearance-none border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline w-full transition duration-300 ease-in-out text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100">
+        <label
+          class="placeholder  text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100 absolute left-3 top-2 text-gray-500 transition-all duration-300 origin-top transform pointer-events-none">🗝️
+          enter a password for the link</label>
+      </div>
+      <div class="p-2 m-2 bg-blue-200">
+        <p class="text-gray-700">The shortened link can only be accessed by those who have the defined password</p>
+      </div>
+
+    </div>
+
+    <div id="set-dates-div" class="hidden mb-4 pt-5">
+
+      <div class="flex items-center mb-2 w-1/2">
+        <label for="start-date" class="block text-gray-700 font-bold mr-2" style="width: 100px;">Start Date:</label>
+        <input type="date" id="start-date" name="start-date"
+          class="border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out flex-1">
+      </div>
+      <div class="flex items-center mb-2 w-1/2">
+        <label for="end-date" class="block text-gray-700 font-bold mr-2" style="width: 100px;">End Date:</label>
+        <input type="date" id="end-date" name="end-date"
+          class="border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out flex-1">
+      </div>
+
+    </div>
+
+    <div id="generate-qr-code-div" class="hidden mb-4">
+      <!-- Generate QR Code Content -->
+      <p >QR code will be generated <span class="orange">For Sure😉</span></p>
+    </div>
+
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+      Submit
+    </button>
+  </div>
+</div>
+  <script>
+    function toggleElement(id) {
+      var element = document.getElementById(id);
+      if (element.style.display === "block") {
+        element.style.display = "none";
+      } else {
+        element.style.display = "block";
+      }
+    }
+
+
+
+    const inputFields = document.querySelectorAll('.animated-input');
+
+    inputFields.forEach(inputField => {
+      const placeholder = inputField.nextElementSibling;
+
+      inputField.addEventListener('focus', () => {
+        placeholder.classList.add('translate-up', 'text-xs', 'text-gray-400');
+        inputField.classList.add('focus:border-blue-500');
+      });
+
+      inputField.addEventListener('blur', () => {
+        if (inputField.value === '') {
+          placeholder.classList.remove('translate-up', 'text-xs', 'text-gray-400');
+        }
+        inputField.classList.remove('focus:border-blue-500');
+      });
+    });
+
+
+  </script>
+</body>
+
+</html>

@@ -4,7 +4,8 @@ const {connectDB} = require('./DB/db');
 const {handlePostUrl,handleLinks} = require('./Controllers/PostUrl')
 
 const app = express();
-
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
 app.use(bodyParser.json());
 const connectedDB = connectDB('mongodb+srv://hash:hash1@cluster0.1j7gdhi.mongodb.net/');
@@ -41,5 +42,9 @@ app.get('/url/:link',async (req,res)=>{
     }
 })
 
+
+app.get('/url',(req,res)=>{
+    res.render('index')
+})
 
 app.listen(3000)

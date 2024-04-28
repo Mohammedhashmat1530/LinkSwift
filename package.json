@@ -11,11 +11,13 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "mongoose": "^8.3.2",
     "nodemon": "^3.1.0",
     "qrcode": "^1.5.3",
     "short-unique-id": "^5.0.3",
-    "simple-id": "^1.0.1"
+    "simple-id": "^1.0.1",
+    "tailwindcss": "^3.4.3"
   }
 }
