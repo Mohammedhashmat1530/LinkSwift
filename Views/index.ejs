@@ -58,6 +58,7 @@
     <div class="py-8 cream">
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-4xl font-bold blue mb-4 leading-4">LinkSwift</h1>
+        
         <p class="text-lg text-gray-800 tracking-wider">Streamline Your Links, Swiftly.<span class="text-3xl">🔗</span></p>
       </div>
     </div>
@@ -178,88 +179,18 @@
           </tr>
         </thead>
         <tbody>
+          
+          <% for (let i = 0; i < response.length; i++) { %>
           <tr>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
+            <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/'+ response[i].shortUrl %>"><%=response[i].longUrl.substring(8)+"..." %></a></td>
+            <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/'+ response[i].shortUrl %>"><%="url/"+ response[i].shortUrl%></a></td>
+            <td class="border px-4 py-2"><a target="_blank" ><%= response[i].password == '' ? 'NO' : 'YES'  %></a></td>
+            <td class="border px-4 py-2"><a target="_blank" ><%= response[i].Clicks  %></a></td>
+            <td class="border px-4 py-2"><a target="_blank" ><%= response[i].qrcode ? 'YES' : 'NO' %></a></td>
+            <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/'+ response[i].shortUrl %>"><%= ((currentDate >= response[i].startdate) && (response[i].enddate >= currentDate)) ? 'LINK👆' : 'Link inaccessible' %></a></td>
             <!-- Add more data cells if needed -->
           </tr>
-          <tr>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <!-- Add more data cells if needed -->
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <!-- Add more data cells if needed -->
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <!-- Add more data cells if needed -->
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <!-- Add more data cells if needed -->
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <!-- Add more data cells if needed -->
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <!-- Add more data cells if needed -->
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <!-- Add more data cells if needed -->
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <td class="border px-4 py-2">Data 1</td>
-            <td class="border px-4 py-2">Data 2</td>
-            <td class="border px-4 py-2">Data 3</td>
-            <!-- Add more data cells if needed -->
-          </tr>
-          <!-- Add more rows if needed -->
+          <% } %>
         </tbody>
       </table>
     </div>

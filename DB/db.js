@@ -41,4 +41,4 @@ module.exports = connectDB;
 module.exports = {
     connectDB,
     URL,
-};
+}

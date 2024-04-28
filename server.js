@@ -1,7 +1,7 @@
 const express = require('express');
 const  bodyParser = require('body-parser');
 const {connectDB} = require('./DB/db');
-const {handlePostUrl,handleLinks} = require('./Controllers/PostUrl')
+const {handlePostUrl,handleLinks,fetchData} = require('./Controllers/PostUrl')
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -43,8 +43,10 @@ app.get('/url/:link',async (req,res)=>{
 })
 
 
-app.get('/url',(req,res)=>{
-    res.render('index')
+app.get('/url',async (req,res)=>{
+     const currentDate = new Date();
+    const response = await fetchData()
+    res.render('index',{response,currentDate})
 })
 
 app.listen(3000)

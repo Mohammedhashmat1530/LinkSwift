@@ -63,7 +63,15 @@ async function handleLinks(link, password) {
 
 }
 
+
+async function fetchData(){
+    const response = await URL.find();
+
+    return response;
+}
+
 module.exports = {
     handlePostUrl,
-    handleLinks
+    handleLinks,
+    fetchData
 };
