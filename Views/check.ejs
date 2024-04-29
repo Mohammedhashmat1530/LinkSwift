@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+          background-image: url('https://images.unsplash.com/photo-1554034483-04fda0d3507b?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+    
+        }
+    
+        .blue {
+          color: #2F3C7E;
+        }
+    
+        .table-container {
+          height: calc(100vh - 4rem);
+          /* Adjust as needed */
+          overflow-y: auto;
+        }
+    
+        .border {
+          border-bottom: 1px solid black;
+        }
+    
+        .translate-up {
+          transform: translateY(-130%);
+    
+        }
+    
+        .orange {
+          color: orange;
+        }
+    
+    
+        /* State when the input field is focused */
+        .focus\:border-blue-500:focus {
+          border-top: 0;
+          border-bottom: 3px solid #2F3C7E;
+        }
+      </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="fixed  w-full h-full flex justify-center items-center">
+        
+        <div class="w-1/2 h-1/2 pt-8 px-8 bg-gray-200 flex  items-center flex-col gap-9">
+
+             
+            <h2 class="mt-4 text-3xl font-medium blue">ENTER password to access the url</h2>
+            <div class="w-full">
+            <form action="<%= link %>" method="get">
+           
+          <div class="relative w-full flex justify-center items-center flex-col  gap-6">
+            <input type="text" name="password" class="animated-input appearance-none border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline w-full transition duration-300 ease-in-out text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100">
+            <label
+              class="placeholder  font-bold placeholder-black placeholder-opacity-100 text-opacity-100 absolute left-3 top-2 text-gray-500 transition-all duration-300 origin-top transform pointer-events-none">ENTER password!</label>
+
+              <button
+        class="bg-blue-500 hover:bg-blue-700 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        ENTER PASSWORD
+      </button>
+          </div>
+        </div>
+        </form>
+      </div>
+
+      
+      
+</body>
+
+<script>
+    function toggleElement(id) {
+      var element = document.getElementById(id);
+      if (element.style.display === "block") {
+        element.style.display = "none";
+      } else {
+        element.style.display = "block";
+      }
+    }
+
+
+
+    const inputFields = document.querySelectorAll('.animated-input');
+
+    inputFields.forEach(inputField => {
+      const placeholder = inputField.nextElementSibling;
+
+      inputField.addEventListener('focus', () => {
+        placeholder.classList.add('translate-up', 'text-xs', 'text-gray-400');
+        inputField.classList.add('focus:border-blue-500');
+      });
+
+      inputField.addEventListener('blur', () => {
+        if (inputField.value === '') {
+          placeholder.classList.remove('translate-up', 'text-xs', 'text-gray-400');
+        }
+        inputField.classList.remove('focus:border-blue-500');
+      });
+    });
+
+
+  </script>
+</html>

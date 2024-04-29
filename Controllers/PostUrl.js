@@ -17,12 +17,19 @@ async function handlePostUrl(longUrl, CustomUrl, password, startdate, enddate,qr
 
     let svg = "no qr generated";
     try {
-        const shortUrl = CustomUrl || simpleId();
+        const shortUrl = CustomUrl || simpleId()
+       
         if (qrcode) {
             svg = await generateQRCode(longUrl);
         }
-
-
+        
+        if (!startdate) {
+            startdate = new Date();
+        }
+        if (!enddate) {
+            enddate = new Date('9999-12-31');
+        }
+      
         await URL.create({
             longUrl,
             shortUrl,
@@ -43,22 +50,31 @@ async function handleLinks(link, password) {
     const response = await URL.findOne({
         shortUrl: link
     })
-    if ((response.password) && (currentDate >= response.startdate && currentDate <= response.enddate)) {
-        if (password === response.password) {
-
+    if (response) {
+       
+        if (response.password && currentDate >= response.startdate && currentDate <= response.enddate) {
+            // If password matches
+            if (password === response.password) {
+                response.Clicks++;
+                await response.save();
+                return response;
+            } else {
+                // If password doesn't match
+                return null;
+            }
+        } else if (currentDate >= response.startdate && currentDate <= response.enddate) {
+            // If password is not required or not provided, but the link is still valid
             response.Clicks++;
-            response.save()
+            await response.save();
             return response;
+        } else {
+            // If link is expired
+            return null;
         }
-
+    } else {
+        // If link is not found
+        return null;
     }
-
-    if (currentDate >= response.startdate && currentDate <= response.enddate) {
-        response.Clicks++;
-        response.save()
-        return response;
-    }
-
 
 
 }
