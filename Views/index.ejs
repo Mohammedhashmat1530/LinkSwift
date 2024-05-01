@@ -30,6 +30,9 @@
       overflow-y: auto;
     }
 
+    #output{
+      display: none;
+    }
     .border {
       border-bottom: 1px solid black;
     }
@@ -67,162 +70,163 @@
   </div>
 
 
-    <div class="max-w-screen-xl mx-auto bg-white p-8 rounded shadow-md ">
-      <form action="/url" method="post">
+  <div class="max-w-screen-xl mx-auto bg-white p-8 rounded shadow-md ">
+    <form action="/url" method="post">
       <div class="mb-4">
-        
-          <div>
+
+        <div>
           <div class="relative w-full">
-            <input type="text" name="longUrl" class="animated-input appearance-none border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline w-full transition duration-300 ease-in-out text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100">
+            <input type="text" name="longUrl"
+              class="animated-input appearance-none border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline w-full transition duration-300 ease-in-out text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100">
             <label
               class="placeholder  font-bold placeholder-black placeholder-opacity-100 text-opacity-100 absolute left-3 top-2 text-gray-500 transition-all duration-300 origin-top transform pointer-events-none">Place
               your URL here!</label>
-          
 
 
 
 
 
-          <label class="block text-gray-700 font-bold mb-2">Options:</label>
-          <div class="flex items-center justify-around">
-            <div>
-              <input id="customize-link"  type="checkbox" class="mr-2 h-4 w-4 "
-                onclick="toggleElement('customize-link-div')">
-              <label for="customize-link" class="mr-4 text-xl font-medium" >Customize Link</label>
+
+            <label class="block text-gray-700 font-bold mb-2">Options:</label>
+            <div class="flex items-center justify-around">
+              <div>
+                <input id="customize-link" type="checkbox" class="mr-2 h-4 w-4 "
+                  onclick="toggleElement('customize-link-div')">
+                <label for="customize-link" class="mr-4 text-xl font-medium">Customize Link</label>
+              </div>
+              <div>
+                <input id="link-with-password" type="checkbox" class="mr-2 h-4 w-4 "
+                  onclick="toggleElement('link-with-password-div')">
+                <label for="link-with-password" class="mr-4 text-xl font-medium">Link with Password</label>
+              </div>
+              <div>
+                <input id="set-dates" type="checkbox" class="mr-2 h-4 w-4 " onclick="toggleElement('set-dates-div')">
+                <label for="set-dates" class="mr-4 text-xl font-medium">Set Dates</label>
+              </div>
+              <div>
+                <input id="generate-qr-code" name="qrcode" type="checkbox" class="mr-2 h-4 w-4 "
+                  onclick="toggleElement('generate-qr-code-div')">
+                <label for="generate-qr-code" class="mr-4 text-xl font-medium">Generate QR Code</label>
+              </div>
             </div>
-            <div>
-              <input id="link-with-password"  type="checkbox" class="mr-2 h-4 w-4 "
-                onclick="toggleElement('link-with-password-div')">
-              <label for="link-with-password" class="mr-4 text-xl font-medium">Link with Password</label>
-            </div>
-            <div>
-              <input id="set-dates" type="checkbox" class="mr-2 h-4 w-4 " onclick="toggleElement('set-dates-div')">
-              <label for="set-dates" class="mr-4 text-xl font-medium">Set Dates</label>
-            </div>
-            <div>
-              <input id="generate-qr-code" name="qrcode"  type="checkbox" class="mr-2 h-4 w-4 "
-                onclick="toggleElement('generate-qr-code-div')">
-              <label for="generate-qr-code" class="mr-4 text-xl font-medium">Generate QR Code</label>
-            </div>
+            <button onclick="process()"
+              class="bg-blue-500 hover:bg-blue-700 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              Submit
+            </button>
           </div>
-          <button
-        class="bg-blue-500 hover:bg-blue-700 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        Submit
-      </button>
+        </div>
+
+
+
+        <div id="customize-link-div" class="hidden mb-4 py-3">
+
+
+          <div class="relative w-full">
+            <input type="text" name="CustomUrl" id="CustomUrl"
+              class="animated-input appearance-none border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline w-full transition duration-300 ease-in-out text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100">
+            <label
+              class="placeholder   font-bold placeholder-black placeholder-opacity-100 text-opacity-100 absolute left-3 top-2 text-gray-500 transition-all duration-300 origin-top transform pointer-events-none">🔗set
+              your custom path</label>
+          </div>
+          <div class="p-2 m-2 bg-blue-200">
+            <p class="text-gray-700" id="CustomPath">Your customized link will have the following path: /</p>
+          </div>
+
+        </div>
+
+
+
+        <div id="link-with-password-div" class="hidden mb-4 pt-6">
+          <!-- Link with Password Content -->
+
+          <div class="relative w-full ">
+            <input type="password" name="password"
+              class="animated-input appearance-none border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline w-full transition duration-300 ease-in-out text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100">
+            <label
+              class="placeholder   font-bold placeholder-black placeholder-opacity-100 text-opacity-100 absolute left-3 top-2 text-gray-500 transition-all duration-300 origin-top transform pointer-events-none">🗝️
+              enter a password for the link</label>
+          </div>
+          <div class="p-2 m-2 bg-blue-200">
+            <p class="text-gray-700">The shortened link can only be accessed by those who have the defined password</p>
+          </div>
+
+        </div>
+
+        <div id="set-dates-div" class="hidden mb-4 pt-5">
+
+          <div class="flex items-center mb-2 w-1/2">
+            <label for="start-date" class="block text-gray-700 font-bold mr-2" style="width: 100px;">Start Date:</label>
+            <input type="date" id="start-date" name="startdate"
+              class="border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out flex-1">
+          </div>
+          <div class="flex items-center mb-2 w-1/2">
+            <label for="end-date" class="block text-gray-700 font-bold mr-2" style="width: 100px;">End Date:</label>
+            <input type="date" id="end-date" name="enddate"
+              class="border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out flex-1">
+          </div>
+
+        </div>
+
+        <div id="generate-qr-code-div" class="hidden mb-4">
+          <!-- Generate QR Code Content -->
+          <p>QR code will be generated <span class="orange">For Sure😉</span></p>
+        </div>
+
+
+
       </div>
-    </div>
+    </form>
+    
 
+    <div class="pt-10">
+      <div class="overflow-y-auto overflow-x-auto">
+        <table class="table-auto w-full">
+          <thead>
+            <tr>
+              <th class="px-4 py-2 bg-gray-800 text-white">Long Url</th>
+              <th class="px-4 py-2 bg-gray-800 text-white">Short Url</th>
+              <th class="px-4 py-2 bg-gray-800 text-white">password</th>
+              <th class="px-4 py-2 bg-gray-800 text-white">Clicks</th>
+              <th class="px-4 py-2 bg-gray-800 text-white">QR Code</th>
+              <th class="px-4 py-2 bg-gray-800 text-white">accessable ?</th>
+              <!-- Add more headers if needed -->
+            </tr>
+          </thead>
+          <tbody>
 
-
-      <div id="customize-link-div" class="hidden mb-4 py-3">
-       
-
-        <div class="relative w-full">
-          <input type="text" name="CustomUrl" id="CustomUrl"
-            class="animated-input appearance-none border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline w-full transition duration-300 ease-in-out text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100">
-          <label
-            class="placeholder   font-bold placeholder-black placeholder-opacity-100 text-opacity-100 absolute left-3 top-2 text-gray-500 transition-all duration-300 origin-top transform pointer-events-none">🔗set
-            your custom path</label>
-        </div>
-        <div class="p-2 m-2 bg-blue-200">
-          <p class="text-gray-700" id="CustomPath">Your customized link will have the following path: /</p>
-        </div>
-
-      </div>
-
-
-
-      <div id="link-with-password-div" class="hidden mb-4 pt-6">
-        <!-- Link with Password Content -->
-
-        <div class="relative w-full ">
-          <input type="password" name="password"
-            class="animated-input appearance-none border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline w-full transition duration-300 ease-in-out text-black font-bold placeholder-black placeholder-opacity-100 text-opacity-100">
-          <label
-            class="placeholder   font-bold placeholder-black placeholder-opacity-100 text-opacity-100 absolute left-3 top-2 text-gray-500 transition-all duration-300 origin-top transform pointer-events-none">🗝️
-            enter a password for the link</label>
-        </div>
-        <div class="p-2 m-2 bg-blue-200">
-          <p class="text-gray-700">The shortened link can only be accessed by those who have the defined password</p>
-        </div>
-
-      </div>
-
-      <div id="set-dates-div" class="hidden mb-4 pt-5">
-
-        <div class="flex items-center mb-2 w-1/2">
-          <label for="start-date" class="block text-gray-700 font-bold mr-2" style="width: 100px;">Start Date:</label>
-          <input type="date" id="start-date" name="startdate"
-            class="border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out flex-1">
-        </div>
-        <div class="flex items-center mb-2 w-1/2">
-          <label for="end-date" class="block text-gray-700 font-bold mr-2" style="width: 100px;">End Date:</label>
-          <input type="date" id="end-date" name="enddate"
-            class="border rounded-md py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out flex-1">
-        </div>
-
-      </div>
-
-      <div id="generate-qr-code-div" class="hidden mb-4">
-        <!-- Generate QR Code Content -->
-        <p>QR code will be generated <span class="orange">For Sure😉</span></p>
-      </div>
-
-      
-
-    </div>
-      </form>
-
-
-      <div class="pt-10">
-        <div class="overflow-y-auto overflow-x-auto">
-          <table class="table-auto w-full">
-            <thead>
+            <% for (let i=0; i < response.length; i++) { %>
               <tr>
-                <th class="px-4 py-2 bg-gray-800 text-white">Long Url</th>
-                <th class="px-4 py-2 bg-gray-800 text-white">Short Url</th>
-                <th class="px-4 py-2 bg-gray-800 text-white">password</th>
-                <th class="px-4 py-2 bg-gray-800 text-white">Clicks</th>
-                <th class="px-4 py-2 bg-gray-800 text-white">QR Code</th>
-                <th class="px-4 py-2 bg-gray-800 text-white">accessable ?</th>
-                <!-- Add more headers if needed -->
+                <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/'+ response[i].shortUrl %>">
+                    <%=response[i].longUrl.substring(8)+"..." %>
+                  </a></td>
+                <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/'+ response[i].shortUrl %>">
+                    <%="url /"+ response[i].shortUrl%>
+                  </a></td>
+                <td class="border px-4 py-2"><a target="_blank">
+                    <%= response[i].password=='' ? 'NO' : 'YES' %>
+                  </a></td>
+                <td class="border px-4 py-2"><a target="_blank">
+                    <%= response[i].Clicks %>
+                  </a></td>
+                <td class="border px-4 py-2"><a target="_blank">
+                    <%= response[i].qrcode=="no qr generated" ? 'NO' : 'YES' %>
+                  </a></td>
+                <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/'+ response[i].shortUrl %>">
+                    <%= ((currentDate>= response[i].startdate) && (response[i].enddate >= currentDate)) ? 'LINK👆' :
+                      'Link inaccessible' %>
+                  </a></td>
+                <!-- Add more data cells if needed -->
               </tr>
-            </thead>
-            <tbody>
-
-              <% for (let i=0; i < response.length; i++) { %>
-                <tr>
-                  <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/'+ response[i].shortUrl %>">
-                      <%=response[i].longUrl.substring(8)+"..." %>
-                    </a></td>
-                  <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/'+ response[i].shortUrl %>">
-                      <%="url /"+ response[i].shortUrl%>
-                    </a></td>
-                  <td class="border px-4 py-2"><a target="_blank">
-                      <%= response[i].password=='' ? 'NO' : 'YES' %>
-                    </a></td>
-                  <td class="border px-4 py-2"><a target="_blank">
-                      <%= response[i].Clicks %>
-                    </a></td>
-                  <td class="border px-4 py-2"><a target="_blank">
-                      <%= response[i].qrcode=="no qr generated" ? 'NO' : 'YES' %>
-                    </a></td>
-                  <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/'+ response[i].shortUrl %>">
-                      <%= ((currentDate>= response[i].startdate) && (response[i].enddate >= currentDate)) ? 'LINK👆' :
-                        'Link inaccessible' %>
-                    </a></td>
-                  <!-- Add more data cells if needed -->
-                </tr>
-                <% } %>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- table tll here -->
+              <% } %>
+          </tbody>
+        </table>
       </div>
-    </div>
 
-  
+      <!-- table tll here -->
+    </div>
+  </div>
+
+
 
 
   <script>
@@ -236,6 +240,10 @@
     }
 
 
+    function process(){
+      var section = document.getElementById('output');
+      section.style.display= 'block'
+    }
 
     const inputFields = document.querySelectorAll('.animated-input');
 
@@ -259,7 +267,7 @@
     const CustomUrlInput = document.getElementById('CustomUrl');
     const CustomPath = document.getElementById('CustomPath');
 
-    CustomUrlInput.addEventListener('input', function() {
+    CustomUrlInput.addEventListener('input', function () {
       CustomPath.textContent = 'Your customized link will have the following path: /' + this.value;
     });
 

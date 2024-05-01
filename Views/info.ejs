@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1554034483-04fda0d3507b?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .blue {
+      color: #2F3C7E;
+    }
+
+    .table-container {
+      height: calc(100vh - 4rem);
+      /* Adjust as needed */
+      overflow-y: auto;
+    }
+
+   
+    .border {
+      border-bottom: 1px solid black;
+    }
+
+    .translate-up {
+      transform: translateY(-130%);
+
+    }
+
+    .orange {
+      color: orange;
+    }
+
+
+    /* State when the input field is focused */
+    .focus\:border-blue-500:focus {
+      border-top: 0;
+      border-bottom: 3px solid #2F3C7E;
+    }
+</style>
+
+<body class="min-h-screen">
+    <div>
+        <div class="py-8 cream">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl font-bold blue mb-4 leading-4">LinkSwift</h1>
+
+                <p class="text-lg text-gray-800 tracking-wider">Streamline Your Links, Swiftly.<span
+                        class="text-3xl">🔗</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="output">
+        <div class="p-7 m-7 bg-blue-100 flex justify-center border-2 border-red-300 shadow-xl flex-col items-center">
+            <p class="text-red-500 text-xl bg-white font-medium  m-2 p-2 shadow-lg tracking-wider w-1/2 flex justify-center" id="outputlink">
+               url/<%= response[response.length-1].shortUrl%>
+            </p>
+            
+            <img src="data:image/svg+xml;base64,<%= btoa(response[response.length-1].qrcode) %>" class="w-1/2 h-64" alt="qr code"/>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

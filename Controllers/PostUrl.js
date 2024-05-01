@@ -13,11 +13,11 @@ async function generateQRCode(longUrl) {
 }
 
 
-async function handlePostUrl(longUrl, CustomUrl, password, startdate, enddate,qrcode) {
+async function handlePostUrl(longUrl, CustomUrl, password, startdate, enddate,qrcode,shortUrl) {
 
     let svg = "no qr generated";
     try {
-        const shortUrl = CustomUrl || simpleId()
+        
        
         if (qrcode) {
             svg = await generateQRCode(longUrl);
@@ -69,7 +69,7 @@ async function handleLinks(link, password) {
             return response;
         } else {
             // If link is expired
-            return null;
+            return 'link expired';
         }
     } else {
         // If link is not found
