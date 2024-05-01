@@ -1,7 +1,7 @@
 const express = require('express');
 const  bodyParser = require('body-parser');
 const {connectDB} = require('./DB/db');
-const {handlePostUrl,handleLinks,fetchData} = require('./Controllers/PostUrl')
+const {handlePostUrl,handleLinks,fetchData,fetchinfo} = require('./Controllers/PostUrl')
 const simpleId = require("simple-id");
 
 const app = express();
@@ -42,7 +42,8 @@ app.get('/url',async (req,res)=>{
 })
 
 app.get('/url/info/:info',async (req,res)=>{
-    const response = await fetchData()
+    const info=req.params.info;
+    const response = await fetchinfo(info)
     res.render('info',{response})
 })
 

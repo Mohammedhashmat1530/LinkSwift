@@ -86,8 +86,17 @@ async function fetchData(){
     return response;
 }
 
+async function fetchinfo(info){
+    const response = await URL.findOne({
+        shortUrl:info
+    })
+
+    return response
+}
+
 module.exports = {
     handlePostUrl,
     handleLinks,
-    fetchData
+    fetchData,
+    fetchinfo
 };

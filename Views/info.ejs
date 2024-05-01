@@ -14,41 +14,44 @@
         background-position: center;
         background-repeat: no-repeat;
     }
+
     .blue {
-      color: #2F3C7E;
+        color: #2F3C7E;
     }
 
     .table-container {
-      height: calc(100vh - 4rem);
-      /* Adjust as needed */
-      overflow-y: auto;
+        height: calc(100vh - 4rem);
+        /* Adjust as needed */
+        overflow-y: auto;
     }
 
-   
+
     .border {
-      border-bottom: 1px solid black;
+        border-bottom: 1px solid black;
     }
 
     .translate-up {
-      transform: translateY(-130%);
+        transform: translateY(-130%);
 
     }
 
     .orange {
-      color: orange;
+        color: orange;
     }
 
 
     /* State when the input field is focused */
     .focus\:border-blue-500:focus {
-      border-top: 0;
-      border-bottom: 3px solid #2F3C7E;
+        border-top: 0;
+        border-bottom: 3px solid #2F3C7E;
     }
 </style>
 
 <body class="min-h-screen">
     <div>
         <div class="py-8 cream">
+            <a href="/url" >
+
             <div class="max-w-4xl mx-auto text-center">
                 <h1 class="text-4xl font-bold blue mb-4 leading-4">LinkSwift</h1>
 
@@ -56,17 +59,28 @@
                         class="text-3xl">🔗</span>
                 </p>
             </div>
+        </a>
         </div>
     </div>
-    <div id="output">
-        <div class="p-7 m-7 bg-blue-100 flex justify-center border-2 border-red-300 shadow-xl flex-col items-center">
-            <p class="text-red-500 text-xl bg-white font-medium  m-2 p-2 shadow-lg tracking-wider w-1/2 flex justify-center" id="outputlink">
-               url/<%= response[response.length-1].shortUrl%>
+    <div  class="h-1/2">
+        <div class="p-7 m-7 bg-blue-100  justify-center border-2 border-red-300 shadow-xl flex  items-center ">
+            <p class="text-xl font-medium text-blue-600">Shortner URL</p>
+            <p class="text-red-500 text-xl bg-white font-medium  m-2 p-2 shadow-lg tracking-wider w-1/2 "
+                id="outputlink">
+                url/<%= response.shortUrl %>
             </p>
-            
-            <img src="data:image/svg+xml;base64,<%= btoa(response[response.length-1].qrcode) %>" class="w-1/2 h-64" alt="qr code"/>
-
         </div>
+   <div class="flex justify-center items-center flex-col">
+    
+            <% if(response.qrcode !=="no qr generated" ){ %>
+                    <p class="mt-7 mb-3 text-xl font-medium text-blue-600">QR for the selected URL</p>
+                <img src="data:image/svg+xml;base64,<%= btoa(response.qrcode) %>" class="w-1/2 h-64" alt="qr code" />
+                <% }else{ %>
+
+                <p class="mt-10 tracking-wide font-medium text-xl text-blue-600" >Qr is not selected for this URL, so Qr is not Generated</p>
+
+                <% } %>
+            </div>
     </div>
 
 </body>

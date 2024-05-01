@@ -208,7 +208,7 @@
                 <td class="border px-4 py-2"><a target="_blank">
                     <%= response[i].Clicks %>
                   </a></td>
-                <td class="border px-4 py-2"><a target="_blank">
+                <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/info/'+ response[i].shortUrl %>">
                     <%= response[i].qrcode=="no qr generated" ? 'NO' : 'YES' %>
                   </a></td>
                 <td class="border px-4 py-2"><a target="_blank" href="<%= 'url/'+ response[i].shortUrl %>">
