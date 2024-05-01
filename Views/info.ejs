@@ -50,19 +50,19 @@
 <body class="min-h-screen">
     <div>
         <div class="py-8 cream">
-            <a href="/url" >
+            <a href="/url">
 
-            <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-4xl font-bold blue mb-4 leading-4">LinkSwift</h1>
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-4xl font-bold blue mb-4 leading-4">LinkSwift</h1>
 
-                <p class="text-lg text-gray-800 tracking-wider">Streamline Your Links, Swiftly.<span
-                        class="text-3xl">🔗</span>
-                </p>
-            </div>
-        </a>
+                    <p class="text-lg text-gray-800 tracking-wider">Streamline Your Links, Swiftly.<span
+                            class="text-3xl">🔗</span>
+                    </p>
+                </div>
+            </a>
         </div>
     </div>
-    <div  class="h-1/2">
+    <div class="h-1/2">
         <div class="p-7 m-7 bg-blue-100  justify-center border-2 border-red-300 shadow-xl flex  items-center ">
             <p class="text-xl font-medium text-blue-600">Shortner URL</p>
             <p class="text-red-500 text-xl bg-white font-medium  m-2 p-2 shadow-lg tracking-wider w-1/2 "
@@ -70,19 +70,48 @@
                 url/<%= response.shortUrl %>
             </p>
         </div>
-   <div class="flex justify-center items-center flex-col">
-    
+        <div class="flex justify-center items-center flex-col">
+
             <% if(response.qrcode !=="no qr generated" ){ %>
-                    <p class="mt-7 mb-3 text-xl font-medium text-blue-600">QR for the selected URL</p>
-                <img src="data:image/svg+xml;base64,<%= btoa(response.qrcode) %>" class="w-1/2 h-64" alt="qr code" />
+                <p class="mt-7 mb-3 text-xl font-medium text-blue-600">QR for the selected URL</p>
+                <div class="flex  items-center gap-10">
+                    <img src="data:image/svg+xml;base64,<%= btoa(response.qrcode) %>" class="w-2/3 h-64"
+                        alt="qr code" />
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline h-auto"
+                        onclick="downloadImage('<%= JSON.stringify(response.qrcode) %>')">Download QR</button>
+                </div>
                 <% }else{ %>
 
-                <p class="mt-10 tracking-wide font-medium text-xl text-blue-600" >Qr is not selected for this URL, so Qr is not Generated</p>
+                    <p class="mt-10 tracking-wide font-medium text-xl text-blue-600">Qr is not selected for this URL, so
+                        Qr is not Generated</p>
 
-                <% } %>
-            </div>
+                    <% } %>
+        </div>
     </div>
 
 </body>
+<script>
+    function downloadImage(response) {
+        console.log(response[0])
+        
+       var svgData=`<!DOCTYPE html><html><head><title>SVG Example</title></head><body>${response}</body></html>`
+       console.log(svgData)
+        try {
+            // Create a blob from SVG data
+            var blob = new Blob([svgData], { type: 'image/svg+xml' });
+
+            // Create an anchor element
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'image.svg'; // Set the download attribute and name of the SVG file
+
+            // Trigger the download
+            a.click();
+        } catch (error) {
+            console.error('Error downloading SVG:', error);
+        }
+    }
+</script>
 
 </html>

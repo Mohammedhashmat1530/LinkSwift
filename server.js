@@ -2,7 +2,8 @@ const express = require('express');
 const  bodyParser = require('body-parser');
 const {connectDB} = require('./DB/db');
 const {handlePostUrl,handleLinks,fetchData,fetchinfo} = require('./Controllers/PostUrl')
-const simpleId = require("simple-id");
+const simpleId = require("simple-id")
+const svgToImg = require("svg-to-img");
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -69,4 +70,4 @@ app.get('/url/:link',async (req,res)=>{
 
 
 
-app.listen(3000)
+app.listen(3000);
