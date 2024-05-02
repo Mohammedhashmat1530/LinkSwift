@@ -6,7 +6,7 @@ work which needs to be done
 5) qr page
 6) custom path bug fixes
 7) download qr img
-8) copy shorturl
+8) copy to dashboard
 
 done
 1)
@@ -14,3 +14,4 @@ done
 3)
 4)
 5)
+7)
