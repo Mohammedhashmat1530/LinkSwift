@@ -19,7 +19,8 @@ if(connectedDB){
 
 app.post('/url',(req,res)=>{
     const longUrl= req.body.longUrl;
-    const CustomUrl=req.body.CustomUrl;
+    let CustomUrl=req.body.CustomUrl;
+    CustomUrl = CustomUrl.replace(/\s+/g, ' ').trim().replace(/\s/g, '-');
     const password= req.body.password;
     const startdate= req.body.startdate;
     const enddate= req.body.enddate;

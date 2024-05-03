@@ -268,7 +268,9 @@
     const CustomPath = document.getElementById('CustomPath');
 
     CustomUrlInput.addEventListener('input', function () {
-      CustomPath.textContent = 'Your customized link will have the following path: /' + this.value;
+      const value = this.value.replace(/\s+/g, ' ').trim().replace(/\s/g, '-')
+      console.log(value)
+      CustomPath.textContent = 'Your customized link will have the following path: /' + value;
     });
 
   </script>
