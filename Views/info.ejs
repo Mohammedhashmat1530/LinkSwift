@@ -65,9 +65,16 @@
     <div class="h-1/2">
         <div class="p-7 m-7 bg-blue-100  justify-center border-2 border-red-300 shadow-xl flex  items-center ">
             <p class="text-xl font-medium text-blue-600">Shortner URL</p>
-            <p class="text-red-500 text-xl bg-white font-medium  m-2 p-2 shadow-lg tracking-wider w-1/2 "
+            <p class="text-red-500 text-xl bg-white font-medium  m-2 p-2 shadow-lg tracking-wider w-2/5 flex justify-between  rounded-l-lg border "
                 id="outputlink">
                 url/<%= response.shortUrl %>
+                <div class="bg-red-600 m-2 p-2 relative right-4 h-full rounded-r-lg">
+                    <button onclick="copytoClipboard()">
+                        <img width="24" height="24" src="https://img.icons8.com/material-sharp/24/copy.png" alt="copy"/>
+                    </button>
+                    
+                </div>
+                
             </p>
         </div>
         <div class="flex justify-center items-center flex-col">
@@ -111,6 +118,16 @@
         } catch (error) {
             console.error('Error downloading SVG:', error);
         }
+    }
+
+    function copytoClipboard(){
+        console.log("heh")
+        var copyText = document.getElementById("outputlink").innerText;
+        navigator.clipboard.writeText(copyText).then(()=>{
+            console.log(copyText)
+        })
+       
+
     }
 </script>
 
